@@ -1,7 +1,7 @@
 {
 	"name": "n8n-nodes-wrangleai",
 	"version": "0.1.0",
-	"description": "",
+	"description": "WrangleAI- Optimize your ai usage",
 	"license": "MIT",
 	"homepage": "",
 	"keywords": [
