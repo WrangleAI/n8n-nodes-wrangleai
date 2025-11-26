@@ -9,6 +9,7 @@ export class WrangleAi implements ICredentialType {
     name = 'wrangleAiApi';
     displayName = 'WrangleAI API';
     documentationUrl = 'https://staging-landing.wrangleai.com/docs/quick-start';
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     icon = 'file:WrangleAi.svg' as any;
 
     properties: INodeProperties[] = [

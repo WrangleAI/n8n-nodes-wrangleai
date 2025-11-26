@@ -1,11 +1,13 @@
 {
-	"name": "n8n-nodes-<...>",
+	"name": "n8n-nodes-wrangleai",
 	"version": "0.1.0",
 	"description": "",
 	"license": "MIT",
 	"homepage": "",
 	"keywords": [
-		"n8n-community-node-package"
+		"n8n-community-node-package",
+		"n8n-community-node-wrangle"
+
 	],
 	"author": {
 		"name": "WrangleAI Team",
