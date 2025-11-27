@@ -21,7 +21,6 @@ export class WrangleAi implements ICredentialType {
             default: '',
             placeholder: 'sk-wrangle-921...',
 
-            // Text displayed beneath the input field 
 			// eslint-disable-next-line n8n-nodes-base/node-param-description-unneeded-backticks
             description: `API key for Wrangle AIs optimized Ai keys`,
             hint:'🔑 <b>NO KEY?</b> <a href="https://wrangleai.com/dashboard/optimized-key/apis" target="_blank">CLICK HERE TO GET YOUR API KEY &rarr;</a>',

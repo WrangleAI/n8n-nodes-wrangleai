@@ -12,7 +12,7 @@ export class WrangleAi implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Wrangle AI',
         documentationUrl: "https://wrangleai.com/docs/quick-start",
-        name: 'wrangleAi', // Internal reference name
+        name: 'wrangleAi', 
         icon: 'file:wrangleAi.svg',
         group: ['transform'],
         version: 1,
@@ -34,7 +34,6 @@ export class WrangleAi implements INodeType {
                 displayName: 'Base URL',
                 name: 'baseUrl',
                 type: 'string',
-                // The library adds /chat/completions automatically.
                 default: 'https://gateway.wrangleai.com/v1',
                 description: 'The base URL of the WrangleAI API',
             },
@@ -117,7 +116,6 @@ export class WrangleAi implements INodeType {
             stopSequences = (options.stop as string).split(',').map((s) => s.trim());
         }
 
-        // Create the LangChain instance pointing to your custom gateway
         const model = new ChatOpenAI({
             modelName: modelName,
             apiKey: credentials.apiKey as string,
