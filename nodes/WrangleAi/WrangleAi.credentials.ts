@@ -8,7 +8,7 @@ import {
 export class WrangleAi implements ICredentialType {
     name = 'wrangleAiApi';
     displayName = 'WrangleAI API';
-    documentationUrl = 'https://.wrangleai.com/docs/quick-start';
+    documentationUrl = 'https://wrangleai.com/docs/quick-start';
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     icon = 'file:WrangleAi.svg' as any;
 
