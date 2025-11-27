@@ -11,7 +11,7 @@ import { ChatOpenAI } from '@langchain/openai';
 export class WrangleAi implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Wrangle AI',
-        documentationUrl: "https://staging-landing.wrangleai.com/docs/quick-start",
+        documentationUrl: "https://wrangleai.com/docs/quick-start",
         name: 'wrangleAi', // Internal reference name
         icon: 'file:wrangleAi.svg',
         group: ['transform'],
@@ -26,7 +26,7 @@ export class WrangleAi implements INodeType {
             {
                 displayName: 'Model',
                 maxConnections: 1,
-                type: 'ai_languageModel', // Using the string is safer as we discussed
+                type: 'ai_languageModel',
             },
         ],
         properties: [
@@ -35,7 +35,7 @@ export class WrangleAi implements INodeType {
                 name: 'baseUrl',
                 type: 'string',
                 // The library adds /chat/completions automatically.
-                default: 'https://staging-gateway.wrangleai.com/v1',
+                default: 'https://gateway.wrangleai.com/v1',
                 description: 'The base URL of the WrangleAI API',
             },
             {

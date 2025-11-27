@@ -8,7 +8,7 @@ import {
 export class WrangleAi implements ICredentialType {
     name = 'wrangleAiApi';
     displayName = 'WrangleAI API';
-    documentationUrl = 'https://staging-landing.wrangleai.com/docs/quick-start';
+    documentationUrl = 'https://.wrangleai.com/docs/quick-start';
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     icon = 'file:WrangleAi.svg' as any;
 
@@ -24,7 +24,7 @@ export class WrangleAi implements ICredentialType {
             // Text displayed beneath the input field 
 			// eslint-disable-next-line n8n-nodes-base/node-param-description-unneeded-backticks
             description: `API key for Wrangle AIs optimized Ai keys`,
-            hint:'🔑 <b>NO KEY?</b> <a href="https://staging-landing.wrangleai.com/dashboard/optimized-key/apis" target="_blank">CLICK HERE TO GET YOUR API KEY &rarr;</a>',
+            hint:'🔑 <b>NO KEY?</b> <a href="https://wrangleai.com/dashboard/optimized-key/apis" target="_blank">CLICK HERE TO GET YOUR API KEY &rarr;</a>',
         },
     ];
 
