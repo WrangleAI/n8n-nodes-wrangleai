@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-wrangleai",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "WrangleAI- Optimize your ai usage",
 	"license": "MIT",
 	"homepage": "",
@@ -23,8 +23,7 @@
 		"dev": "n8n-node dev",
 		"lint": "n8n-node lint",
 		"lint:fix": "n8n-node lint --fix",
-		"release": "n8n-node release",
-		"prepublishOnly": "n8n-node prerelease"
+		"release": "n8n-node release"
 	},
 	"files": [
 		"dist"

@@ -43,6 +43,7 @@ export class WrangleAi implements INodeType {
                 type: 'string',
                 default: 'auto',
                 description: "The model ID to send to the router, Use 'auto' for most optimal result",
+                placeholder: 'e.g. gpt-4o-mini',
             },
             {
                 displayName: 'Options',
@@ -57,6 +58,7 @@ export class WrangleAi implements INodeType {
 						type: 'number',
 						default: 1500,
 						description: 'The maximum number of tokens to generate in the completion',
+                        placeholder: 'e.g. 500',
 					},
 					{
 						displayName: 'N (Choices)',
@@ -64,6 +66,7 @@ export class WrangleAi implements INodeType {
 						type: 'number',
 						default: 1,
 						description: 'How many chat completion choices to generate for each input message',
+                        placeholder: 'e.g. 1',
 					},
 					{
 						displayName: 'Stop Sequences',
@@ -71,6 +74,7 @@ export class WrangleAi implements INodeType {
 						type: 'string',
 						default: '',
 						description: 'Comma-separated list of sequences where the API will stop generating further tokens',
+                        placeholder: 'e.g. \n, user:',
 					},
 					{
 						displayName: 'Temperature',
@@ -82,6 +86,7 @@ export class WrangleAi implements INodeType {
 							maxValue: 2,
 						},
 						description: 'Sampling temperature to use',
+                        placeholder: 'e.g. 0.7',
 					},
 					{
 						displayName: 'Top P',
@@ -93,6 +98,7 @@ export class WrangleAi implements INodeType {
 							maxValue: 1,
 						},
 						description: 'Nucleus sampling probability',
+                        placeholder: 'e.g. 0.7',
 					},
                 ],
             },
