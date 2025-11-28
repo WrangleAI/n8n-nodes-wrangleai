@@ -38,12 +38,92 @@ export class WrangleAi implements INodeType {
                 description: 'The base URL of the WrangleAI API',
             },
             {
-                displayName: 'Model Name',
+                displayName: 'Model',
                 name: 'modelName',
-                type: 'string',
+                type: 'options',
                 default: 'auto',
                 description: "The model ID to send to the router, Use 'auto' for most optimal result",
                 placeholder: 'e.g. gpt-4o-mini',
+                options: [
+					{
+						name: 'Auto (Smart Routing)',
+						value: 'auto',
+						description: 'Automatically routes to the best model for the task',
+					},
+					// --- GPT 5 Series ---
+					{
+						name: 'GPT-5',
+						value: 'gpt-5',
+					},
+					{
+						name: 'GPT-5 Chat Latest',
+						value: 'gpt-5-chat-latest',
+					},
+					{
+						name: 'GPT-5.1',
+						value: 'gpt-5.1',
+					},
+					{
+						name: 'GPT-5.1 Chat Latest',
+						value: 'gpt-5.1-chat-latest',
+					},
+					{
+						name: 'GPT-5 Mini',
+						value: 'gpt-5-mini',
+					},
+					{
+						name: 'GPT-5 Nano',
+						value: 'gpt-5-nano',
+					},
+					// --- GPT 4 Series ---
+					{
+						name: 'GPT-4',
+						value: 'gpt-4',
+					},
+					{
+						name: 'GPT-4o',
+						value: 'gpt-4o',
+					},
+					{
+						name: 'GPT-4o Mini',
+						value: 'gpt-4o-mini',
+					},
+					{
+						name: 'GPT-4.1 Mini',
+						value: 'gpt-4.1-mini',
+					},
+					// --- Gemini Series ---
+					{
+						name: 'Gemini 2.5 Flash',
+						value: 'gemini-2.5-flash',
+					},
+					{
+						name: 'Gemini 2.5 Flash Lite',
+						value: 'gemini-2.5-flash-lite',
+					},
+					{
+						name: 'Gemini 2.5 Pro',
+						value: 'gemini-2.5-pro',
+					},
+					// --- Mistral / Codestral ---
+					{
+						name: 'Codestral 2',
+						value: 'codestral-2',
+					},
+					{
+						name: 'Codestral 2501',
+						value: 'codestral-2501',
+					},
+					{
+						name: 'Mistral Small 2503',
+						value: 'mistral-small-2503',
+					},
+					// --- Open Source / Other ---
+					{
+						name: 'OpenAI GPT OSS 120b Maas',
+						value: 'openai/gpt-oss-120b-maas',
+					},
+				],
             },
             {
                 displayName: 'Options',
