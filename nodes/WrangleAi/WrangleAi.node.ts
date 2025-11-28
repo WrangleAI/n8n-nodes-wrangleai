@@ -6,7 +6,7 @@ import {
     IDataObject
 } from 'n8n-workflow';
 // eslint-disable-next-line @n8n/community-nodes/no-restricted-imports
-import { ChatOpenAI } from '@langchain/openai';
+import { WrangleAiChatModel } from './WrangleAiChatModel';
 
 export class WrangleAi implements INodeType {
     description: INodeTypeDescription = {
@@ -202,12 +202,10 @@ export class WrangleAi implements INodeType {
             stopSequences = (options.stop as string).split(',').map((s) => s.trim());
         }
 
-        const model = new ChatOpenAI({
+        const model = new WrangleAiChatModel({
             modelName: modelName,
             apiKey: credentials.apiKey as string,
-            configuration: {
-                baseURL: baseUrl,
-            },
+            baseUrl: baseUrl,
             temperature: options.temperature as number,
             maxTokens: options.maxTokens as number,
             topP: options.topP as number,
