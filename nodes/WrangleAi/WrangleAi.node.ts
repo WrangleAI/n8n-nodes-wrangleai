@@ -14,7 +14,7 @@ export class WrangleAi implements INodeType {
 		icon: 'file:wrangleAi.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'Custom AI model routing for our company',
+		description: 'Optimized WrangelAI LLM routing',
 		defaults: {
 			name: 'Wrangle AI',
 		},
@@ -136,6 +136,13 @@ export class WrangleAi implements INodeType {
 				],
 			},
 			{
+				displayName: 'Web Search',
+				name: 'webSearch',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to enable online search capabilities. (Only gemini and openai models support Web Search currently!).',
+			},
+			{
 				displayName: 'Options',
 				name: 'options',
 				type: 'collection',
@@ -197,6 +204,7 @@ export class WrangleAi implements INodeType {
 
 		const baseUrl = this.getNodeParameter('baseUrl', itemIndex) as string;
 		const modelName = this.getNodeParameter('modelName', itemIndex) as string;
+		const webSearch = this.getNodeParameter('webSearch', itemIndex, false) as boolean;
 		const options = this.getNodeParameter('options', itemIndex, {}) as IDataObject;
 
 		let stopSequences: string[] | undefined;
@@ -208,6 +216,7 @@ export class WrangleAi implements INodeType {
 			modelName: modelName,
 			apiKey: credentials.apiKey as string,
 			baseUrl: baseUrl,
+			webSearch: webSearch,
 			temperature: options.temperature as number,
 			maxTokens: options.maxTokens as number,
 			topP: options.topP as number,
