@@ -14,7 +14,7 @@ export class WrangleAi implements INodeType {
 		icon: 'file:wrangleAi.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'Optimized WrangelAI LLM routing',
+		description: 'Optimized WrangleAI LLM routing',
 		defaults: {
 			name: 'Wrangle AI',
 		},

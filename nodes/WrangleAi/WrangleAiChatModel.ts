@@ -158,14 +158,15 @@ function formatToolToOpenAI(tool: any): any {
 			parameters = JSON.parse(JSON.stringify(tool.jsonSchema));
 			delete parameters.$schema;
 		} catch (e) {
-			//ignore
+			return e
 		 }
 	}
 	else if (schema) {
 		if (schema._def) {
 			try {
 				parameters = convertZodToJsonSchema(schema);
-			} catch (e) { //ignore
+			} catch (e) { 
+				return e
 				 }
 		} else {
 			parameters = schema;
@@ -430,7 +431,7 @@ export class WrangleAiChatModel {
 			try {
 				const args = JSON.parse(firstToolCall.function.arguments);
 				query = args.query;
-			} catch (e) { /* ignore */ }
+			} catch (e) { return e }
 
 			let searchResultText = "Search failed or returned no results.";
 			try {
@@ -466,7 +467,7 @@ export class WrangleAiChatModel {
 					}
 				}
 			} catch (e) {
-				//ignore
+				return e
 			}
 
 			openAiMessages.push({
@@ -518,7 +519,7 @@ export class WrangleAiChatModel {
 					try {
 						args = JSON.parse(tc.function.arguments);
 					} catch (e) {
-						//ignore
+						return e
 					 }
 					
 					if (args && typeof args === 'object' && 'id' in args) {

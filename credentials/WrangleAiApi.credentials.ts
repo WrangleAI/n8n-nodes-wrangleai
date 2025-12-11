@@ -3,14 +3,14 @@ import {
     ICredentialType,
 	ICredentialTestRequest,
     INodeProperties,
+    Icon
 } from 'n8n-workflow';
 
-export class WrangleAi implements ICredentialType {
+export class WrangleAiApi implements ICredentialType {
     name = 'wrangleAiApi';
     displayName = 'WrangleAI API';
     documentationUrl = 'https://wrangleai.com/docs/quick-start';
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    icon = 'file:WrangleAi.svg' as any;
+    icon:Icon = 'file:../nodes/WrangleAi/wrangleAi.svg';
 
     properties: INodeProperties[] = [
         {
@@ -20,9 +20,7 @@ export class WrangleAi implements ICredentialType {
             typeOptions: { password: true },
             default: '',
             placeholder: 'sk-wrangle-921...',
-
-			// eslint-disable-next-line n8n-nodes-base/node-param-description-unneeded-backticks
-            description: `API key for WrangleAI's optimized AI models`,
+            description: "API key for WrangleAI's optimized AI models",
             hint:'🔑 <b>NO KEY?</b> <a href="https://wrangleai.com/dashboard/optimized-key/apis" target="_blank">CLICK HERE TO GET YOUR API KEY &rarr;</a>',
         },
     ];

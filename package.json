@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-wrangleai",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "WrangleAI- Optimize your ai usage",
 	"license": "MIT",
 	"homepage": "",
@@ -32,7 +32,7 @@
 		"n8nNodesApiVersion": 1,
 		"strict": true,
 		"credentials": [
-			"dist/nodes/WrangleAi/WrangleAi.credentials.js"
+			"dist/credentials/WrangleAiApi.credentials.js"
 		],
 		"nodes": [
 			"dist/nodes/WrangleAi/WrangleAi.node.js"
