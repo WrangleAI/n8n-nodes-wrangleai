@@ -2,8 +2,8 @@ import {
 	IDataObject,
 	INodeType,
 	INodeTypeDescription,
-	ISupplyDataFunctions,
-	SupplyData,
+	IExecuteFunctions,
+	INodeExecutionData,
 } from 'n8n-workflow';
 import { WrangleAiChatModel } from './WrangleAiChatModel';
 
@@ -32,14 +32,8 @@ export class WrangleAi implements INodeType {
 			},
 		},
 		usableAsTool: true,
-		inputs: [],
-		outputs: [
-			{
-				displayName: 'Model',
-				maxConnections: 1,
-				type: 'ai_languageModel',
-			},
-		],
+		inputs: ['main'],
+		outputs: ['main'],
 		credentials: [
 			{
 				name: 'wrangleAiApi',
@@ -129,12 +123,21 @@ export class WrangleAi implements INodeType {
 						name: 'Mistral Small 2503',
 						value: 'mistral-small-2503',
 					},
-					{
-						name: 'OpenAI GPT OSS 120b Maas',
-						value: 'openai/gpt-oss-120b-maas',
-					},
+					
 				],
 			},
+			{
+				displayName: 'Prompt',
+				name: 'prompt',
+				type: 'string',
+				default: '',
+				required: true,
+				typeOptions: {
+					rows: 4,
+				},
+				description: 'The text prompt to send to the model',
+			},
+
 			{
 				displayName: 'Web Search',
 				name: 'webSearch',
@@ -198,34 +201,73 @@ export class WrangleAi implements INodeType {
 			},
 		],
 	};
-
-	async supplyData(this: ISupplyDataFunctions, itemIndex: number): Promise<SupplyData> {
+	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+		const items = this.getInputData();
+		const returnData: INodeExecutionData[] = [];
 		const credentials = await this.getCredentials('wrangleAiApi');
 
-		const baseUrl = this.getNodeParameter('baseUrl', itemIndex) as string;
-		const modelName = this.getNodeParameter('modelName', itemIndex) as string;
-		const webSearch = this.getNodeParameter('webSearch', itemIndex, false) as boolean;
-		const options = this.getNodeParameter('options', itemIndex, {}) as IDataObject;
+		// Loop over all input items
+		for (let i = 0; i < items.length; i++) {
+			try {
+				const baseUrl = this.getNodeParameter('baseUrl', i) as string;
+				const modelName = this.getNodeParameter('modelName', i) as string;
+				const prompt = this.getNodeParameter('prompt', i) as string;
+				const webSearch = this.getNodeParameter('webSearch', i, false) as boolean;
+				const options = this.getNodeParameter('options', i, {}) as IDataObject;
 
-		let stopSequences: string[] | undefined;
-		if (options.stop) {
-			stopSequences = (options.stop as string).split(',').map((s) => s.trim());
+				let stopSequences: string[] | undefined;
+				if (options.stop) {
+					stopSequences = (options.stop as string).split(',').map((s) => s.trim());
+				}
+
+				// Initialize the existing ChatModel logic
+				const model = new WrangleAiChatModel({
+					modelName: modelName,
+					apiKey: credentials.apiKey as string,
+					baseUrl: baseUrl,
+					webSearch: webSearch,
+					temperature: options.temperature as number,
+					maxTokens: options.maxTokens as number,
+					topP: options.topP as number,
+					n: options.n as number,
+					stop: stopSequences,
+				});
+
+				const messagePayload = [
+					{
+						role: 'user',
+						content: prompt
+					}
+				];
+
+				// Pass the payload to invoke
+				const response = await model.invoke(messagePayload);
+
+				// Return the text content
+				returnData.push({
+					json: {
+						response: response.content,
+					},
+					pairedItem: {
+						item: i,
+					},
+				});
+			} catch (error) {
+				if (this.continueOnFail()) {
+					returnData.push({
+						json: {
+							error: (error as Error).message,
+						},
+						pairedItem: {
+							item: i,
+						},
+					});
+					continue;
+				}
+				throw error;
+			}
 		}
 
-		const model = new WrangleAiChatModel({
-			modelName: modelName,
-			apiKey: credentials.apiKey as string,
-			baseUrl: baseUrl,
-			webSearch: webSearch,
-			temperature: options.temperature as number,
-			maxTokens: options.maxTokens as number,
-			topP: options.topP as number,
-			n: options.n as number,
-			stop: stopSequences,
-		});
-
-		return {
-			response: model,
-		};
+		return [returnData];
 	}
 }
